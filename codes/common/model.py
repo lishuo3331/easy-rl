@@ -43,6 +43,8 @@ class Critic(nn.Module):
         self.linear3.bias.data.uniform_(-init_w, init_w)
         
     def forward(self, state, action):
+        print(state.shape)
+        print(action.shape)
         # 按维数1拼接
         x = torch.cat([state, action], 1)
         x = F.relu(self.linear1(x))

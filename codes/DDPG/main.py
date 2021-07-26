@@ -42,7 +42,7 @@ class DDPGConfig:
         self.actor_lr = 1e-4 
         self.memory_capacity = 10000
         self.batch_size = 128
-        self.train_eps =300
+        self.train_eps =5
         self.eval_eps = 200
         self.eval_steps = 200
         self.target_update = 4
@@ -82,11 +82,12 @@ def train(cfg,env,agent):
 
 if __name__ == "__main__":
     cfg = DDPGConfig()
-    env = 
     env = NormalizedActions(gym.make("Pendulum-v0"))
     env.seed(1) # 设置env随机种子
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
+    print(state_dim)
+    print(action_dim)
     agent = DDPG(state_dim,action_dim,cfg)
     rewards,ma_rewards = train(cfg,env,agent)
     agent.save(path=SAVED_MODEL_PATH)
