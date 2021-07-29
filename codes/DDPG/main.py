@@ -64,7 +64,10 @@ def train(cfg,env,agent):
         while not done:
             i_step += 1
             action = agent.choose_action(state)
+            print("action",action)
             action = ou_noise.get_action(action, i_step)  # 即paper中的random process
+            print("ou_noise_action",action)
+            # print("ou_noise_action_shape",action.shape)
             next_state, reward, done, _ = env.step(action)
             ep_reward += reward
             agent.memory.push(state, action, reward, next_state, done)

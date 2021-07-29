@@ -41,7 +41,9 @@ class DDPG:
 
     def choose_action(self, state):
         state = torch.FloatTensor(state).unsqueeze(0).to(self.device)
+        print("choose_action_state",state)
         action = self.actor(state)
+        print("choose_action_action",action)
         # torch.detach()用于切断反向传播
         return action.detach().cpu().numpy()[0, 0]
 
